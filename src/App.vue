@@ -27,16 +27,16 @@
         <h2 class="blac">BLAC AGENCY</h2>
         <h3 class="lorem">Dream Tournament 2024</h3>
         <p class="euro">European Football Scouting Tournament</p>
-        <p class="read">+ Read More</p>
+        <p class="read"><span class="plus">+</span> Read More</p>
       </div>
     </div>
-    <div class="third-flex"> 
-<div class="image-holder"> 
-  <img src="@/assets/vehicles.jpg" class="pic" />
-</div>
-<div class="image-holder2"> 
-  <img src="@/assets/agama.jpg" class="pic1" />
-</div>
+    <div class="third-flex">
+      <div class="image-holder">
+        <img src="@/assets/vehicles.jpg" class="pic" />
+      </div>
+      <div class="image-holder2">
+        <img src="@/assets/agama.jpg" class="pic1" />
+      </div>
     </div>
     <Home class="Home"></Home>
   </div>
@@ -55,8 +55,9 @@ export default {
 </script>
 
 <style scoped>
+
 .root-div {
-  background: #f3eded;
+  background: #d8c9c9;
   height: 100%;
   top: 0;
   left: 0;
@@ -64,7 +65,18 @@ export default {
   z-index: 999;
   margin: 0;
   padding: 0;
-  position: relative;
+  animation: fadeInAnimation ease-out 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .first-flex {
@@ -104,7 +116,6 @@ export default {
   color: black;
   font-weight: bolder;
   border-bottom: 2px solid black;
-  
 }
 
 .span-1 {
@@ -114,7 +125,7 @@ export default {
   animation: write 3s steps(90, end);
 }
 
-@keyframes write{
+@keyframes write {
   0% {
     font-size: 2px;
   }
@@ -159,7 +170,6 @@ export default {
   margin: 100px 50px 0 50px;
   padding: 0;
 }
-
 .image-house {
   width: 38%;
   height: 100%;
@@ -209,8 +219,8 @@ export default {
   border-bottom: 2px solid rgb(117, 103, 103);
 }
 
-.blac{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.blac {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 45px;
   color: black;
   margin: 0;
@@ -224,22 +234,40 @@ export default {
   margin: 0;
 }
 
-.euro{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.euro {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 20px;
   word-wrap: break-word;
   color: rgb(78, 2, 2);
   margin: 0;
 }
 
-.read{
+.read {
   color: rgb(79, 121, 6);
   font-family: "Courier New", Courier, monospace;
   font-size: 20px;
   margin: 0;
+  padding: 0;
+  animation: bounce ease-in-out 4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
 }
 
-.third-flex{
+.plus{
+  font-size: 35px;
+  margin: 0;
+}
+
+@keyframes bounce {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.third-flex {
   display: flex;
   flex-direction: row;
   width: auto;
@@ -250,28 +278,28 @@ export default {
   padding: 0;
 }
 
-.image-holder{
+.image-holder {
   width: 54%;
   height: 100%;
   margin: auto 0 auto 0;
   padding: 0;
 }
 
-.image-holder2{
+.image-holder2 {
   width: 42%;
   height: 100%;
   margin: auto 0 auto 0;
   padding: 0;
 }
 
-.pic{
+.pic {
   width: 100%;
   margin: 0;
   height: 420px;
   border-radius: 6px;
 }
 
-.pic1{
+.pic1 {
   width: 100%;
   margin: 0;
   height: 420px;
