@@ -2,43 +2,54 @@
   <div class="root-div">
     <div class="first-flex">
       <div class="flex-child1">
-        <h1 class="title">
-          BLAC
-          <span class="span-1">- Design & Build</span>
-        </h1>
+        <h1 class="title">BLAC.</h1>
       </div>
       <div class="flex-child2">
-        <img src="@/assets/facebook.svg" class="facebook" />
-        <img src="@/assets/x.svg" class="twitter" />
-        <a href="https:/instagram.com/blac.lyfe" target="blank" class="link">
-          <img src="@/assets/instagram.svg" class="instagram" />
-        </a>
+        <h2 class="home" :class="{ active: activeNav }" @click="changeNav()">
+          Home
+        </h2>
+        <h2
+          class="about"
+          :class="{ active1: activeNav1 }"
+          @click="changeNav1()"
+        >
+          About Us
+        </h2>
+        <h2
+          class="service"
+          :class="{ active2: activeNav2 }"
+          @click="changeNav2()"
+        >
+          Services
+        </h2>
+        <h2
+          class="event"
+          :class="{ active3: activeNav3 }"
+          @click="changeNav3()"
+        >
+          Events
+        </h2>
+      </div>
+      <div class="flex-child3">
+        <button class="button1">Get In Touch</button>
       </div>
     </div>
-    <div class="second-flex">
-      <div class="image-house">
-        <img src="@/assets/kayak.jpg" class="image1" />
-      </div>
-      <div class="image-house2">
-        <img src="@/assets/dirt-bike.jpg" class="image2" />
-      </div>
-      <div class="text-house">
-        <p class="projects">Projects</p>
-        <h2 class="blac">BLAC AGENCY</h2>
-        <h3 class="lorem">Dream Tournament 2024</h3>
-        <p class="euro">European Football Scouting Tournament</p>
-        <p class="read"><span class="plus">+</span> Read More</p>
-      </div>
+    <div class="image-header">
+      <img :src="currentImg" class="image-slide" />
+      <h3 class="join">Join the Revolution</h3>
+      <p class="push">Push your limits, inspire change.</p>
+      <button class="blog">BLOG</button>
     </div>
-    <div class="third-flex">
-      <div class="image-holder">
-        <img src="@/assets/vehicles.jpg" class="pic" />
-      </div>
-      <div class="image-holder2">
-        <img src="@/assets/agama.jpg" class="pic1" />
-      </div>
+
+    <div class="image-grid">
+    <div class="image-item" v-for="(image, index) in grid" :key="index">
+      <img :src="image.url" :alt="image.alt">
+      <p>{{ image.caption }}</p>
     </div>
+    </div>
+
     <Home class="Home"></Home>
+    
   </div>
 </template>
 
@@ -49,34 +60,125 @@ export default {
   name: "App",
   components: { Home },
   data() {
-    return {};
+    return {
+      activeNav: true,
+      activeNav1: false,
+      activeNav2: false,
+      activeNav3: false,
+      images: [
+        require('@/assets/soccer-corner.jpg'),
+        require('@/assets/stadium.jpg'),
+        require('@/assets/football.jpg'),
+        require('@/assets/american-football.jpg')
+      ],
+      timer: null,
+      currentIndex: 0,
+      grid: [
+        {
+          url: require('@/assets/soccer-corner.jpg'),
+          alt: "Description of image 1",
+          caption: "This is image 1"
+        },
+        {
+          url: require('@/assets/soccer-corner.jpg'),
+          alt: "Description of image 2",
+          caption: "This is image 2"
+        },
+        {
+          url: require('@/assets/soccer-corner.jpg'),
+          alt: "Description of image 3",
+          caption: "This is image 3"
+        },
+        {
+          url: require('@/assets/soccer-corner.jpg'),
+          alt: "Description of image 4",
+          caption: "This is image 4"
+        },
+        {
+          url: "https://example.com/image5.jpg",
+          alt: "Description of image 5",
+          caption: "This is image 5"
+        },
+        {
+          url: require('@/assets/soccer-corner.jpg'),
+          alt: "Description of image 6",
+          caption: "This is image 6"
+        }
+      ]
+    };
   },
+
+  mounted() {
+    this.startSlide();
+  },
+
+  methods: {
+    changeNav() {
+      if (this.activeNav) {
+        this.activeNav = true;
+        this.activeNav1 = false;
+        this.activeNav2 = false;
+        this.activeNav3 = false;
+      }
+    },
+    changeNav1() {
+      if (this.activeNav1) {
+        this.activeNav = false;
+        this.activeNav1 = true;
+        this.activeNav2 = false;
+        this.activeNav3 = false;
+      }
+    },
+    changeNav2() {
+      if (this.activeNav2) {
+        this.activeNav = false;
+        this.activeNav1 = true;
+        this.activeNav2 = true;
+        this.activeNav3 = false;
+      }
+    },
+    changeNav3() {
+      if (this.activeNav3) {
+        this.activeNav = false;
+        this.activeNav1 = false;
+        this.activeNav2 = false;
+        this.activeNav3 = true;
+      }
+    },
+
+    startSlide() {
+      this.timer = setInterval(this.next, 4000);
+    },
+    next() {
+      this.currentIndex += 1;
+    },
+    prev() {
+      this.currentIndex -= 1;
+    }
+  },
+
+  computed: {
+    currentImg() {
+      return this.images[Math.abs(this.currentIndex) % this.images.length];
+    }
+  }
 };
 </script>
 
 <style scoped>
-
 .root-div {
-  background: #d8c9c9;
-  height: 100%;
+  background: #000000ff;
+  background-size: cover;
+  min-height: 100vh;
   top: 0;
   left: 0;
-  width: 100vw;
+  min-width: 100vw;
   z-index: 999;
   margin: 0;
   padding: 0;
   animation: fadeInAnimation ease-out 2s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-}
-
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 .first-flex {
@@ -88,221 +190,220 @@ export default {
   align-items: center;
   height: 50px;
   width: 100%;
-  background: rgb(244, 244, 251);
+  background: #171a1fff;
+  border-radius: 0px;
+  box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
 }
 
 .flex-child1 {
-  width: auto;
-  margin: auto 0 auto 50px;
+  width: 20%;
+  margin: auto 0 auto 0;
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  padding: 0 0 0 25px;
 }
 .flex-child2 {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-evenly;
+  align-items: flex-start;
+  width: 45%;
+  height: 100%;
+  margin: auto 0 auto 0;
+}
+
+.flex-child3 {
+  width: 35%;
+  margin: auto 0 auto 0;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
-  width: 200px;
-  height: 100%;
-  margin: auto 0 auto 0;
+  padding: 0 25px 0 0;
 }
+
+.button1 {
+  width: 160px;
+  height: 36px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Manrope;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #ffffffff;
+  background: #6d31edff;
+  opacity: 1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* Hover */
+.button1:hover {
+  color: #ffffffff;
+  background: #5113d7ff;
+  cursor: pointer;
+}
+
+.home {
+  font-family: Manrope;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+  color: #9f79f3ff;
+  background: #000000ff;
+  cursor: pointer;
+}
+
+.about {
+  font-family: Manrope;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #a8adb7ff;
+  cursor: pointer;
+}
+
+.about:hover {
+  color: rgb(231, 223, 249);
+  background: #000000ff;
+}
+.active {
+  color: #9f79f3ff;
+  font-size: 16px;
+}
+
+.active1 {
+  color: #9f79f3ff;
+  font-size: 16px;
+}
+
+.active2 {
+  color: #9f79f3ff;
+  font-size: 16px;
+}
+
+.active3 {
+  color: #9f79f3ff;
+  font-size: 16px;
+}
+.service {
+  font-family: Manrope;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #a8adb7ff;
+  cursor: pointer;
+}
+
+.event {
+  font-family: Manrope;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #a8adb7ff;
+  cursor: pointer;
+}
+
 .title {
-  font-family: arial;
-  font-size: 30px;
-  color: black;
-  font-weight: bolder;
-  border-bottom: 2px solid black;
+  font-family: Lexend arial;
+  font-size: 28px;
+  line-height: 42px;
+  font-weight: 700;
+  color: #ffffffff;
 }
 
-.span-1 {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 15px;
-  color: rgb(79, 121, 6);
-  animation: write 3s steps(90, end);
-}
-
-@keyframes write {
-  0% {
-    font-size: 2px;
-  }
-  50% {
-    font-size: 8px;
-  }
-  100% {
-    font-size: 15px;
-  }
-}
-
-.facebook {
-  height: 20px;
-  width: 30px;
-  margin: 0;
-}
-
-.twitter {
-  height: 20px;
-  width: 30px;
-  margin: 0;
-}
-
-.instagram {
-  height: 23px;
-  width: 30px;
-  margin: 4px 0 0 0;
-}
-
-.link {
-  margin: 0;
-  padding: 0;
-}
-
-.second-flex {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  height: auto;
-  justify-content: space-between;
-  align-items: start;
-  margin: 100px 50px 0 50px;
-  padding: 0;
-}
-.image-house {
-  width: 38%;
-  height: 100%;
-  margin: auto 0 auto 0;
-  padding: 0;
-}
-
-.image1 {
+.image-header {
   width: 100%;
-  margin: 0;
-  height: 420px;
-  border-radius: 6px;
+  height: 770px;
 }
 
-.image-house2 {
-  width: 28%;
-  height: 100%;
-  margin: auto 0 auto 0;
-  padding: 0;
-}
-
-.image2 {
+.image-slide {
   width: 100%;
-  margin: 0;
-  height: 420px;
-  border-radius: 6px;
-}
-
-.text-house {
-  width: 28%;
-  height: 420px;
-  margin: 0 0 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
-.projects {
-  margin: 0 0 0 0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 25px;
-  font-weight: bold;
-  color: rgb(80, 56, 12);
-  border-bottom: 2px solid rgb(117, 103, 103);
-}
-
-.blac {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 45px;
-  color: black;
-  margin: 0;
-  font-weight: bold;
-}
-
-.lorem {
-  font-family: arial;
-  font-size: 38px;
-  color: rgb(78, 2, 2);
-  margin: 0;
-}
-
-.euro {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 20px;
-  word-wrap: break-word;
-  color: rgb(78, 2, 2);
-  margin: 0;
-}
-
-.read {
-  color: rgb(79, 121, 6);
-  font-family: "Courier New", Courier, monospace;
-  font-size: 20px;
-  margin: 0;
-  padding: 0;
-  animation: bounce ease-in-out 4s;
-  animation-iteration-count: infinite;
-  animation-fill-mode: forwards;
-}
-
-.plus{
-  font-size: 35px;
-  margin: 0;
-}
-
-@keyframes bounce {
-  0% {
-    opacity: 0.2;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.third-flex {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  height: auto;
-  justify-content: space-between;
-  align-items: start;
-  margin: 30px 50px 0 50px;
-  padding: 0;
-}
-
-.image-holder {
-  width: 54%;
   height: 100%;
-  margin: auto 0 auto 0;
-  padding: 0;
+  object-fit: cover;
+  opacity: 0.9;
 }
 
-.image-holder2 {
-  width: 42%;
-  height: 100%;
-  margin: auto 0 auto 0;
-  padding: 0;
+.join{
+  position: absolute; 
+  top: 292px; 
+  left: 132px; 
+  width: auto; 
+  height: auto; 
+  font-family: Lexend; 
+  font-size: 64px; 
+  font-weight: 1000; 
+  color: #ffffffff; 
+  letter-spacing: -5;
+  text-shadow: 1px 1px 1px black,
+  -1px -1px 1px black;
+  opacity: 1;
 }
 
-.pic {
-  width: 100%;
-  margin: 0;
-  height: 420px;
-  border-radius: 6px;
+.push{
+  position: absolute; 
+  top: 470px; 
+  left: 132px; 
+  width: 1176px; 
+  height: 36px; 
+  font-family: Manrope;
+  font-size: 24px; 
+  font-weight: 1000; 
+  color: rgb(250, 224, 224); 
+  text-shadow: 1px 1px 1px black,
+  -1px -1px 1px black;
 }
 
-.pic1 {
-  width: 100%;
-  margin: 0;
-  height: 420px;
-  border-radius: 6px;
+.blog{
+  position: absolute; 
+  top: 560px; 
+  left: 132px; 
+  height: 52px; 
+  width: 160px;
+  padding: 0 20px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-family: Manrope; 
+  font-size: 18px; 
+  font-weight: 800; 
+  color: #FFFFFFFF; 
+  background: #6D31EDFF; 
+  opacity: 1; 
+  border: none; 
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px black,
+  -1px -1px 1px black;
+}
+
+.blog:hover {
+  color: #FFFFFFFF; 
+  background: #5113D7FF; 
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  
+  gap: 20px;           
+  width: 80%;                   
+  margin: 70px auto 0 auto;
+}
+
+.image-item {
+  text-align: center;
+}
+
+.image-item img {
+  width: 100%;      
+  height: auto;      
+  display: block;    
 }
 </style>
