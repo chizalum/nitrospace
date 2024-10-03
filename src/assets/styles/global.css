@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('@/assets/fonts/Inter.ttf') format('ttf'), url('@/assets/fonts/Inter.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'Inter-Italic';
+  src: url('../fonts/Inter-Italic.ttf') format('ttf'), url('../fonts/Inter-Italic.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Inter", "Inter-Italic", sans-serif;
+  background: #000000ff;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --clr-1: #052b2f;
+  --clr-2: #073438;
+  --clr-3: #073438;
+  --clr-4: #0e4b50;
+  --clr-5: #2d8f85;
+  --clr-1: #637c54;
+}

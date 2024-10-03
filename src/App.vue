@@ -36,20 +36,42 @@
     </div>
     <div class="image-header">
       <img :src="currentImg" class="image-slide" />
-      <h3 class="join">Join the Revolution</h3>
-      <p class="push">Push your limits, inspire change.</p>
-      <button class="blog">BLOG</button>
+      <div class="first-blur">
+      <div class="first-absolute">
+        <h3 class="join">Join the Revolution</h3>
+        <p class="push">Push your limits, inspire change.</p>
+        <button class="blog">BLOG</button>
+      </div>
+      </div>
     </div>
-
-    <div class="image-grid">
-    <div class="image-item" v-for="(image, index) in grid" :key="index">
-      <img :src="image.url" :alt="image.alt">
-      <p>{{ image.caption }}</p>
+    <div class="partner-div">
+      <div class="partner-child1">
+        <h3 class="partner-text">Our Valued Partners</h3>
+      </div>
+      <div class="partner-child2">
+        <div class="partner-row">
+          <p class="member-partner">Nitrospace</p>
+          <p class="member-partner">NFF</p>
+          <p class="member-partner">Mma Health&Welless</p>
+        </div>
+      </div>
     </div>
+    <div class="insert-home">
+      <div class="home2">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. At maxime
+          repudiandae quam velit consequatur! Eius cum asperiores, omnis
+          voluptas laborum saepe minima dolores odit, unde velit libero?
+          Aspernatur, labore eveniet. Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. Temporibus atque corporis nulla soluta vero culpa
+          perferendis veniam, corrupti inventore consectetur rem voluptate ea
+          maiores dolor velit laboriosam mollitia repellendus similique!
+        </p>
+      </div>
+      <div class="home1">
+        <Home class="imported-home"></Home>
+      </div>
     </div>
-
-    <Home class="Home"></Home>
-    
   </div>
 </template>
 
@@ -58,7 +80,9 @@ import Home from "./components/Home.vue";
 
 export default {
   name: "App",
-  components: { Home },
+  components: {
+    Home,
+  },
   data() {
     return {
       activeNav: true,
@@ -66,45 +90,17 @@ export default {
       activeNav2: false,
       activeNav3: false,
       images: [
-        require('@/assets/soccer-corner.jpg'),
-        require('@/assets/stadium.jpg'),
-        require('@/assets/football.jpg'),
-        require('@/assets/american-football.jpg')
+        require("@/assets/headline-photos/headline.jpg"),
+        require("@/assets/headline-photos/headline19.jpg"),
+        require("@/assets/headline-photos/headline4.jpg"),
+        require("@/assets/headline-photos/headline6.jpg"),
+        require("@/assets/headline-photos/headline18.jpg"),
+        require("@/assets/headline-photos/headline10.jpg"),
+        require("@/assets/headline-photos/headline14.jpg"),
+        require("@/assets/headline-photos/headline15.jpg"),
       ],
       timer: null,
       currentIndex: 0,
-      grid: [
-        {
-          url: require('@/assets/soccer-corner.jpg'),
-          alt: "Description of image 1",
-          caption: "This is image 1"
-        },
-        {
-          url: require('@/assets/soccer-corner.jpg'),
-          alt: "Description of image 2",
-          caption: "This is image 2"
-        },
-        {
-          url: require('@/assets/soccer-corner.jpg'),
-          alt: "Description of image 3",
-          caption: "This is image 3"
-        },
-        {
-          url: require('@/assets/soccer-corner.jpg'),
-          alt: "Description of image 4",
-          caption: "This is image 4"
-        },
-        {
-          url: "https://example.com/image5.jpg",
-          alt: "Description of image 5",
-          caption: "This is image 5"
-        },
-        {
-          url: require('@/assets/soccer-corner.jpg'),
-          alt: "Description of image 6",
-          caption: "This is image 6"
-        }
-      ]
     };
   },
 
@@ -114,36 +110,28 @@ export default {
 
   methods: {
     changeNav() {
-      if (this.activeNav) {
-        this.activeNav = true;
-        this.activeNav1 = false;
-        this.activeNav2 = false;
-        this.activeNav3 = false;
-      }
+      this.activeNav = true;
+      this.activeNav1 = false;
+      this.activeNav2 = false;
+      this.activeNav3 = false;
     },
     changeNav1() {
-      if (this.activeNav1) {
-        this.activeNav = false;
-        this.activeNav1 = true;
-        this.activeNav2 = false;
-        this.activeNav3 = false;
-      }
+      this.activeNav = false;
+      this.activeNav1 = true;
+      this.activeNav2 = false;
+      this.activeNav3 = false;
     },
     changeNav2() {
-      if (this.activeNav2) {
-        this.activeNav = false;
-        this.activeNav1 = true;
-        this.activeNav2 = true;
-        this.activeNav3 = false;
-      }
+      this.activeNav = false;
+      this.activeNav1 = false;
+      this.activeNav2 = true;
+      this.activeNav3 = false;
     },
     changeNav3() {
-      if (this.activeNav3) {
-        this.activeNav = false;
-        this.activeNav1 = false;
-        this.activeNav2 = false;
-        this.activeNav3 = true;
-      }
+      this.activeNav = false;
+      this.activeNav1 = false;
+      this.activeNav2 = false;
+      this.activeNav3 = true;
     },
 
     startSlide() {
@@ -154,21 +142,22 @@ export default {
     },
     prev() {
       this.currentIndex -= 1;
-    }
+    },
   },
 
   computed: {
     currentImg() {
       return this.images[Math.abs(this.currentIndex) % this.images.length];
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
+body{
+  font-family: 'Inter', 'Inter-Italic', sans-serif;
+}
 .root-div {
-  background: #000000ff;
-  background-size: cover;
   min-height: 100vh;
   top: 0;
   left: 0;
@@ -188,11 +177,13 @@ export default {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: 60px;
   width: 100%;
   background: #171a1fff;
   border-radius: 0px;
   box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
+  position: fixed;
+  z-index: 999;
 }
 
 .flex-child1 {
@@ -245,7 +236,7 @@ export default {
   border-radius: 6px;
   cursor: pointer;
 }
-/* Hover */
+
 .button1:hover {
   color: #ffffffff;
   background: #5113d7ff;
@@ -318,11 +309,14 @@ export default {
   line-height: 42px;
   font-weight: 700;
   color: #ffffffff;
+  letter-spacing: 4px;
 }
 
 .image-header {
   width: 100%;
-  height: 770px;
+  min-height: 770px;
+  height: 80vh;
+  position: relative;
 }
 
 .image-slide {
@@ -330,80 +324,184 @@ export default {
   height: 100%;
   object-fit: cover;
   opacity: 0.9;
+  box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #171a1fff);
 }
 
-.join{
-  position: absolute; 
-  top: 292px; 
-  left: 132px; 
-  width: auto; 
-  height: auto; 
-  font-family: Lexend; 
-  font-size: 64px; 
-  font-weight: 1000; 
-  color: #ffffffff; 
+.first-blur{
+  background: rgba(79, 78, 78, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 22px 0 rgba(114, 113, 113, 0.37);
+  height: 100%;
+  width: 44%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 auto 0 auto;
+}
+
+.first-absolute {
+  position: absolute;
+  top: 292px;
+  left: 132px;
+  margin: 0 auto 0 auto;
+}
+
+.join {
+  width: auto;
+  height: auto;
+  font-family: Lexend;
+  font-size: 64px;
+  font-weight: 1000;
+  color: #ffffffff;
   letter-spacing: -5;
-  text-shadow: 1px 1px 1px black,
-  -1px -1px 1px black;
+  text-shadow: 1px 1px 1px black, -1px -1px 1px black;
   opacity: 1;
 }
 
-.push{
-  position: absolute; 
-  top: 470px; 
-  left: 132px; 
-  width: 1176px; 
-  height: 36px; 
+.push {
+  width: 1176px;
+  height: 36px;
   font-family: Manrope;
-  font-size: 24px; 
-  font-weight: 1000; 
-  color: rgb(250, 224, 224); 
-  text-shadow: 1px 1px 1px black,
-  -1px -1px 1px black;
+  font-size: 24px;
+  font-weight: 1000;
+  color: rgb(245, 243, 243);
+  text-shadow: 1px 1px 1px black, -1px -1px 1px black;
 }
 
-.blog{
-  position: absolute; 
-  top: 560px; 
-  left: 132px; 
-  height: 52px; 
+.blog {
+  height: 52px;
   width: 160px;
-  padding: 0 20px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-family: Manrope; 
-  font-size: 18px; 
-  font-weight: 800; 
-  color: #FFFFFFFF; 
-  background: #6D31EDFF; 
-  opacity: 1; 
-  border: none; 
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffffff;
+  background: #6d31edff;
+  opacity: 1;
+  border: none;
   border-radius: 8px;
-  box-shadow: 1px 1px 1px black,
-  -1px -1px 1px black;
+  box-shadow: 1px 1px 1px black, -1px -1px 1px black;
 }
 
 .blog:hover {
-  color: #FFFFFFFF; 
-  background: #5113D7FF; 
+  color: #ffffffff;
+  background: #5113d7ff;
 }
 
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);  
-  gap: 20px;           
-  width: 80%;                   
+.partner-div {
+  height: 80vh;
+}
+
+.partner-child1 {
+  width: 100%;
+  margin: 0;
+  height: 40%;
+}
+
+.partner-text {
+  font-family: 'Inter-Italic', sans-serif;
+  font-optical-sizing: auto;
+  font-size: 60px;
+  font-weight: 600;
+  font-style: normal;
+  color: white;
+}
+
+.partner-child2 {
+  width: 100%;
+  margin: 0;
+  height: 60%;
+}
+
+.partner-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.member-partner {
+  font-family: 'Inter-Italic';
+  font-optical-sizing: auto;
+  font-size: 19px;
+  font-weight: 600;
+  font-style: normal;
+  color: white;
+}
+
+.insert-home {
+  width: 100%;
+  height: 640px;
+  margin: 30px 0 0 0;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.home2 {
+  margin: 0;
+  padding: 0;
+  width: 56%;
+  height: 100%;
+  background: #171a1fff;
+  border-radius: 0px;
+  box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #171a1fff),
+    url("@/assets/football.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.second-imagehead {
+  width: 100%;
+  height: 100%;
+}
+
+.home1 {
+  animation: ship 0.8s ease-in forwards;
+  width: 44%;
+  margin: 0 auto 0 auto;
+  justify-content: center;
+  background: #171a1fff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 3px solid #171a1fff;
+}
+
+.imported-home {
   margin: 70px auto 0 auto;
+  width: 90%;
+  justify-content: start;
 }
 
-.image-item {
-  text-align: center;
-}
-
-.image-item img {
-  width: 100%;      
-  height: auto;      
-  display: block;    
+@keyframes ship {
+  0% {
+    transform: translateY(-12%);
+    opacity: 0.1;
+  }
+  25% {
+    transform: translateY(-9%);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-6%);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-3%);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }
 </style>
